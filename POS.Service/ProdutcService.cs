@@ -29,8 +29,8 @@ namespace POS.Service
 
         public ProductEntity View(int? id)
         {
-            var customer = _context.productEntities.Find(id);
-            return customer;
+            var product = _context.productEntities.Find(id);
+            return product;
         }
 
         public void Update(ProductEntity product)
@@ -41,9 +41,9 @@ namespace POS.Service
 
         public void Delete(int? id)
         {
-            var customer = View(id);
+            var product = View(id);
 
-            _context.productEntities.Remove(customer); 
+            _context.productEntities.Remove(product); 
             _context.SaveChanges();
         }
 
