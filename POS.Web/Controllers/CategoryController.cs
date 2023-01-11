@@ -14,16 +14,48 @@ namespace POS.Web.Controllers
 
         public IActionResult Index()
         {
-            var Data = _service.GetCategories();
+            var Data = _service.Get();
             return View(Data);
+        }
+
+        [HttpGet]
+        public IActionResult Add()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Save([Bind("CategoryName, Description")] CategoryEntity request)
+        {
+            _service.Add(request);
+            return Redirect("Index");
+        }
+
+        [HttpGet]
+        public IActionResult Details(int? id)
+        {
+            var category = _service.View(id);
+            return View(category);
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int? id)
+        {
+            var category = _service.View(id);
+            return View(category);
         }
 
         [HttpPost]
-        public IActionResult Add(CategoryEntity category)
+        public IActionResult Update([Bind("Id, CategoryName, Description")] CategoryEntity category)
         {
-            var Data = _service.GetCategories();
-            return View(Data);
+            _service.Update(category);
+            return Redirect("Index");
+        }
 
+        [HttpGet]
+        public IActionResult Delete(int? id)
+        {
+            _service.Delete(id);
+            return Redirect("/Category");
         }
     }
-    }
+}

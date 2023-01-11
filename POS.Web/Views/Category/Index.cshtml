@@ -1,11 +1,15 @@
-﻿@model IEnumerable<POS.Repository.CategoryEntity>
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model IEnumerable<POS.Repository.CategoryEntity>
 @{
-    ViewBag.Title = "title";
+    ViewBag.Title = "Category";
     Layout = "_Layout";
 }
-
-<h2>Company Get All</h2>
-<a asp-action="Add" class="btn btn-sm btn-primary m-md-4">Add Company</a>
+<h2>Category</h2>
+<div class="pt-2 pb-2">
+    <a asp-action="Add" class="btn btn-primary" role="button">Add Category </a>
+</div>
 <table class="table table-responsive">
     <thead>
         <tr>
