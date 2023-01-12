@@ -140,8 +140,8 @@ namespace POS.Repository.Migrations
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     product_name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SupplierId = table.Column<int>(type: "int", nullable: false),
-                    CategoryId = table.Column<int>(type: "int", nullable: false),
+                    supplier_id = table.Column<int>(type: "int", nullable: false),
+                    category_id = table.Column<int>(type: "int", nullable: false),
                     quantity_per_unit = table.Column<long>(type: "bigint", nullable: false),
                     unit_price = table.Column<double>(type: "float", nullable: false),
                     unit_in_stock = table.Column<long>(type: "bigint", nullable: false),
@@ -154,13 +154,13 @@ namespace POS.Repository.Migrations
                     table.PrimaryKey("PK_tbl_product", x => x.id);
                     table.ForeignKey(
                         name: "FK_tbl_product_tbl_category_CategoryId",
-                        column: x => x.CategoryId,
+                        column: x => x.category_id,
                         principalTable: "tbl_category",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_tbl_product_tbl_supplier_SupplierId",
-                        column: x => x.SupplierId,
+                        column: x => x.supplier_id,
                         principalTable: "tbl_supplier",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);

@@ -19,9 +19,14 @@ namespace POS.Repository
         [Column("product_name")]
         public string ProductName { get; set; }
 
+        [Column("supplier_id")]
+        public int SupplierId { get; set; }
+       
         [Required]
         public SupplierEntity Supplier { get; set; }
 
+        [Column("category_id")]
+        public int CategoryId { get; set; }
         [Required]
         public CategoryEntity Category { get; set; }
 
@@ -54,6 +59,8 @@ namespace POS.Repository
         public ProductEntity(POS.ViewModel.ProductModel model)
         {
             ProductName= model.ProductName;
+            SupplierId= model.SupplierId;
+            CategoryId= model.CategoryId;
             UnitPrice = model.UnitPrice;
             UnitInStock= model.UnitInStock;
             UnitOnOrder= model.UnitOnOrder;

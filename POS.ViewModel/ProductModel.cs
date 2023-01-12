@@ -10,6 +10,12 @@ namespace POS.ViewModel
         public string ProductName { get; set; }
 
         [Required]
+        public int SupplierId { get; set; }
+
+        [Required]
+        public int CategoryId { get; set; }
+
+        [Required]
         public long QuantityPerUnit { get; set; }
 
         [Required]
