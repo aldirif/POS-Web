@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "POS.Repository", "POS.DataC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "POS.Service", "POS.Service\POS.Service.csproj", "{BCE2D752-E29F-4A50-B62C-74B378B5060E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POS.ViewModel", "POS.ViewModel\POS.ViewModel.csproj", "{48158D17-BAC7-41E0-8CB7-DF71C88C4C24}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "POS.ViewModel", "POS.ViewModel\POS.ViewModel.csproj", "{48158D17-BAC7-41E0-8CB7-DF71C88C4C24}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

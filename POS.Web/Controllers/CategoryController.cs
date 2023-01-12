@@ -50,16 +50,10 @@ namespace POS.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Update([Bind("Id, CategoryName, Description")] CategoryModel category)
+        public IActionResult Update([Bind("Id, CategoryName, Description")] CategoryEntity category)
         {
-            if (ModelState.IsValid)
-            {
-                CategoryEntity categoryEntity= new CategoryEntity(category);
-                categoryEntity.Id = category.Id;
-                _service.Update(categoryEntity);
-                return Redirect("Index");
-            }
-            return View("Edit", category);
+            _service.Update(category);
+            return Redirect("Index");
         }
 
         [HttpGet]
