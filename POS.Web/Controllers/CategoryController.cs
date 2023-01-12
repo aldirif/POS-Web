@@ -15,8 +15,9 @@ namespace POS.Web.Controllers
 
         public IActionResult Index()
         {
-            var Data = _service.Get();
-            return View(Data);
+            var categories = _service.Get();
+            return View(categories);
+
         }
 
         [HttpGet]
@@ -50,10 +51,15 @@ namespace POS.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Update([Bind("Id, CategoryName, Description")] CategoryEntity category)
+        public IActionResult Update([Bind("Id, CategoryName, Description")] CategoryModel category)
         {
-            _service.Update(category);
-            return Redirect("Index");
+            if (ModelState.IsValid)
+            {
+                _service.Update(category);
+                return Redirect("Index");
+            }
+            return View("Edit", category);
+
         }
 
         [HttpGet]

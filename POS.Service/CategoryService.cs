@@ -6,12 +6,30 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using POS.Repository;
+using POS.ViewModel;
 
 namespace POS.Service
 {
     public class CategoryService
     {
         private readonly ApplicationDbContext _context;
+
+        private CategoryModel EntityToModel(CategoryEntity entity)
+        {
+            CategoryModel result = new CategoryModel();
+            result.Id = entity.Id;
+            result.CategoryName = entity.CategoryName;
+            result.Description = entity.Description;
+
+            return result;
+        }
+
+        private void ModelToEntity(CategoryModel model, CategoryEntity entity)
+        {
+            entity.CategoryName = model.CategoryName;
+            entity.Description = model.Description;
+        }
+
         public CategoryService(ApplicationDbContext context)
         {
             _context = context;
@@ -28,23 +46,28 @@ namespace POS.Service
             _context.SaveChanges();
         }
 
-        public CategoryEntity View(int? id)
+        public CategoryModel View(int? id)
         {
             var category = _context.categoryEntities.Find(id);
-            return category;
+            return EntityToModel(category);
         }
 
-        public void Update(CategoryEntity category)
+        public void Update(CategoryModel category)
         {
-            _context.categoryEntities.Update(category);
+            var entity = _context.categoryEntities.Find(category.Id);
+            ModelToEntity(category, entity);
+            _context.categoryEntities.Update(entity);
             _context.SaveChanges();
+
         }
 
         public void Delete(int? id)
         {
-            var category = View(id);
 
-            _context.categoryEntities.Remove(category);
+            var entity = _context.categoryEntities.Find(id);
+
+
+            _context.categoryEntities.Remove(entity);
             _context.SaveChanges();
         }
 
