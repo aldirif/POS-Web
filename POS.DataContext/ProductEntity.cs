@@ -47,8 +47,24 @@ namespace POS.Repository
 
         [Required]
         [Column("discontinued")]
-        public bool Discontinued { get; set; }
+        public string Discontinued { get; set; }
 
         public ICollection<OrderDetailsEntity> orderDetailsEntities { get; set; }
+
+        public ProductEntity(POS.ViewModel.ProductModel model)
+        {
+            ProductName= model.ProductName;
+            UnitPrice = model.UnitPrice;
+            UnitInStock= model.UnitInStock;
+            UnitOnOrder= model.UnitOnOrder;
+            ReorderLevel= model.ReorderLevel;
+            Discontinued= model.Discontinued;
+
+        }
+
+        public ProductEntity()
+        {
+
+        }
     }
 }

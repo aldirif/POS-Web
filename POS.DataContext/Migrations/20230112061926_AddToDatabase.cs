@@ -147,7 +147,7 @@ namespace POS.Repository.Migrations
                     unit_in_stock = table.Column<long>(type: "bigint", nullable: false),
                     unit_on_order = table.Column<long>(type: "bigint", nullable: false),
                     reorder_level = table.Column<long>(type: "bigint", nullable: false),
-                    discontinued = table.Column<bool>(type: "bit", nullable: false)
+                    discontinued = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using POS.Repository;
 using POS.Service;
+using POS.ViewModel;
 
 namespace POS.Web.Controllers
 {
@@ -27,10 +28,14 @@ namespace POS.Web.Controllers
 
         [HttpPost]
         public IActionResult Save(
-            [Bind("CompanyName, ContactName, ContactTitle, Address, City, Region, PostalCode, Country, Phone, Fax")] CustomersEntity request)
+            [Bind("CompanyName, ContactName, ContactTitle, Address, City, Region, PostalCode, Country, Phone, Fax")] CustomerModel request)
         {
-            _service.Add(request);
-            return Redirect("Index");
+            if (ModelState.IsValid)
+            {
+                _service.Add(new CustomersEntity(request));
+                return Redirect("Index");
+            }
+            return View("Add", request);
         }
 
         [HttpGet]

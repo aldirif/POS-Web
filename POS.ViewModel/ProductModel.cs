@@ -2,7 +2,7 @@
 
 namespace POS.ViewModel
 {
-    internal class ProductModel
+    public class ProductModel
     {
         public int Id { get; set; }
 
@@ -25,6 +25,6 @@ namespace POS.ViewModel
         public long ReorderLevel { get; set; }
 
         [Required]
-        public bool Discontinued { get; set; }
+        public string Discontinued { get; set; }
     }
 }

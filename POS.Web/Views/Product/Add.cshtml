@@ -1,7 +1,7 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
-@model POS.Repository.ProductEntity
+@model POS.ViewModel.ProductModel
 
 @{
     ViewData["Title"] = "New Product";
@@ -13,38 +13,37 @@
     <div class="form-group">
         <label asp-for="ProductName">Product Name</label>
         <input asp-for="ProductName" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label asp-for="Supplier">Supplier</label>
-        <input asp-for="Supplier" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label asp-for="Category">Category</label>
-        <input asp-for="Category" class="form-control" />
+        <span asp-validation-for="ProductName" class="text-danger" />
     </div>
     <div class="form-group">
         <label asp-for="QuantityPerUnit">Quantity Per Unit</label>
         <input asp-for="QuantityPerUnit" class="form-control" />
+        <span asp-validation-for="QuantityPerUnit" class="text-danger" />
     </div>
     <div class="form-group">
         <label asp-for="UnitPrice">Unit Price</label>
         <input asp-for="UnitPrice" class="form-control" />
+        <span asp-validation-for="UnitPrice" class="text-danger" />
     </div>
     <div class="form-group">
         <label asp-for="UnitInStock">Unit In Stock</label>
         <input asp-for="UnitInStock" class="form-control" />
+        <span asp-validation-for="UnitInStock" class="text-danger" />
     </div>
     <div class="form-group">
         <label asp-for="UnitOnOrder">Unit On Order</label>
         <input asp-for="UnitOnOrder" class="form-control" />
+        <span asp-validation-for="UnitOnOrder" class="text-danger" />
     </div>
     <div class="form-group">
         <label asp-for="ReorderLevel">Reorder Level</label>
         <input asp-for="ReorderLevel" class="form-control" />
+        <span asp-validation-for="ReorderLevel" class="text-danger" />
     </div>
     <div class="form-group">
         <label asp-for="Discontinued">Discontinued</label>
         <input asp-for="Discontinued" class="form-control" />
+        <span asp-validation-for="Discontinued" class="text-danger" />
     </div>
     <div class="pt-2 pb-2">
         <button type="submit" class="btn btn-primary">Submit</button>
