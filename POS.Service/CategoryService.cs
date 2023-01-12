@@ -65,8 +65,6 @@ namespace POS.Service
         {
 
             var entity = _context.categoryEntities.Find(id);
-
-
             _context.categoryEntities.Remove(entity);
             _context.SaveChanges();
         }

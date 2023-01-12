@@ -1,4 +1,5 @@
 ﻿using POS.Repository;
+using POS.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,39 @@ namespace POS.Service
     public class SupplierService
     {
         private readonly ApplicationDbContext _context;
+        private SupplierModel EntityToModel(SupplierEntity entity)
+        {
+            SupplierModel result = new SupplierModel();
+            result.Id = entity.Id;
+            result.CompanyName = entity.CompanyName;
+            result.ContactName = entity.ContactName;
+            result.ContactTitle= entity.ContactTitle;
+            result.Address = entity.Address;
+            result.City = entity.City;
+            result.Region = entity.Region;
+            result.PostalCode = entity.PostalCode;
+            result.Country = entity.Country;
+            result.Phone = entity.Phone;
+            result.Fax = entity.Fax;
+            result.HomePage= entity.HomePage;
+
+            return result;
+        }
+
+        private void ModelToEntity(SupplierModel model, SupplierEntity entity)
+        {
+            entity.CompanyName= model.CompanyName;
+            entity.ContactName= model.ContactName;
+            entity.ContactTitle= model.ContactTitle;
+            entity.Address= model.Address;
+            entity.City= model.City;
+            entity.Region= model.Region;
+            entity.PostalCode= model.PostalCode;
+            entity.Country= model.Country;
+            entity.Phone= model.Phone;
+            entity.Fax= model.Fax;
+            entity.HomePage= model.HomePage;
+        }
 
         public SupplierService(ApplicationDbContext context)
         {
@@ -27,22 +61,24 @@ namespace POS.Service
             _context.SaveChanges();
         }
 
-        public SupplierEntity View(int? id)
+        public SupplierModel View(int? id)
         {
             var supplier = _context.supplierEntities.Find(id);
-            return supplier;
+            return EntityToModel(supplier);
         }
 
-        public void Update(SupplierEntity supplier)
+        public void Update(SupplierModel supplier)
         {
-            _context.supplierEntities.Update(supplier);
+            var entity = _context.supplierEntities.Find(supplier.Id);
+            ModelToEntity(supplier, entity);
+            _context.supplierEntities.Update(entity);
             _context.SaveChanges();
         }
 
         public void Delete(int? id)
         {
-            var supplier = View(id);
-            _context.supplierEntities.Remove(supplier);
+            var entity = _context.supplierEntities.Find(id);
+            _context.supplierEntities.Remove(entity);
             _context.SaveChanges();
         }
     }

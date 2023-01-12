@@ -16,8 +16,8 @@ namespace POS.Web.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var customers = _service.Get();
-            return View(customers);
+            var Data = _service.Get();
+            return View(Data);
         }
 
         [HttpGet]
@@ -53,10 +53,14 @@ namespace POS.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Update([Bind("Id, CompanyName, ContactName, ContactTitle, Address, City, Region, PostalCode, Country, Phone, Fax")] CustomersEntity customer)
+        public IActionResult Update([Bind("Id, CompanyName, ContactName, ContactTitle, Address, City, Region, PostalCode, Country, Phone, Fax")] CustomerModel customer)
         {
-            _service.Update(customer);
-            return Redirect("Index");
+            if (ModelState.IsValid)
+            {
+                _service.Update(customer);
+                return Redirect("Index");
+            }
+            return View("Edit", customer);
         }
 
         [HttpGet]

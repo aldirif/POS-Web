@@ -15,8 +15,8 @@ namespace POS.Web.Controllers
 
         public IActionResult Index()
         {
-            var categories = _service.Get();
-            return View(categories);
+            var Data = _service.Get();
+            return View(Data);
 
         }
 
