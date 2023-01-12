@@ -51,16 +51,10 @@ namespace POS.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Update([Bind("Id, CompanyName, ContactName, ContactTitle, Address, City, Region, PostalCode, Country, Phone, Fax, HomePage")] SupplierModel supplier)
+        public IActionResult Update([Bind("Id, CompanyName, ContactName, ContactTitle, Address, City, Region, PostalCode, Country, Phone, Fax, HomePage")] SupplierEntity supplier)
         {
-            if (ModelState.IsValid)
-            {
-                SupplierEntity supplierEntity = new SupplierEntity(supplier);
-                supplierEntity.Id = supplier.Id;
-                _service.Update(supplierEntity);
-                return Redirect("Index");
-            }
-            return View("Edit", supplier);
+            _service.Update(supplier);
+            return Redirect("Index");
         }
 
         [HttpGet]
