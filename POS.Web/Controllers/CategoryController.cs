@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using POS.Service;
 using POS.Repository;
+using POS.ViewModel;
 
 namespace POS.Web.Controllers
 {
@@ -24,10 +25,14 @@ namespace POS.Web.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Save([Bind("CategoryName, Description")] CategoryEntity request)
+        public IActionResult Save([Bind("CategoryName, Description")] CategoryModel request)
         {
-            _service.Add(request);
-            return Redirect("Index");
+            if(ModelState.IsValid)
+            {
+                _service.Add(new CategoryEntity(request));
+                return Redirect("Index");
+            }
+            return View("Add", request);
         }
 
         [HttpGet]
@@ -45,10 +50,16 @@ namespace POS.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Update([Bind("Id, CategoryName, Description")] CategoryEntity category)
+        public IActionResult Update([Bind("Id, CategoryName, Description")] CategoryModel category)
         {
-            _service.Update(category);
-            return Redirect("Index");
+            if (ModelState.IsValid)
+            {
+                CategoryEntity categoryEntity= new CategoryEntity(category);
+                categoryEntity.Id = category.Id;
+                _service.Update(categoryEntity);
+                return Redirect("Index");
+            }
+            return View("Edit", category);
         }
 
         [HttpGet]
