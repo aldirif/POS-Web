@@ -25,6 +25,13 @@ namespace POS.Web.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        public IActionResult AddModal()
+        {
+            return PartialView("_Add");
+        }
+
         [HttpPost]
         public IActionResult Save([Bind("CompanyName, ContactName, ContactTitle, Address, City, Region, PostalCode, Country, Phone, Fax, HomePage")] SupplierModel request)
         {
