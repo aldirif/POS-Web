@@ -5,19 +5,19 @@ using POS.ViewModel;
 
 namespace POS.Web.Controllers
 {
-    public class ProductController : Controller
+    public class OrderDetailController : Controller
     {
-        private readonly ProductService _service;
-        public ProductController(ApplicationDbContext context)
+        private readonly OrderDetailService _service;
+        public OrderDetailController(ApplicationDbContext context)
         {
-            _service = new ProductService(context);
+            _service = new OrderDetailService(context);
         }
 
         [HttpGet]
         public IActionResult Index()
         {
-            var product = _service.Get();
-            return View(product);
+            var orderDetail = _service.Get();
+            return View(orderDetail);
         }
 
         [HttpGet]
@@ -34,11 +34,11 @@ namespace POS.Web.Controllers
 
         [HttpPost]
         public IActionResult Save(
-            [Bind("ProductName, SupplierId, CategoryId, QuantityPerUnit, UnitPrice, UnitInStock, UnitOnOrder, ReorderLevel, Discontinued")] ProductModel request)
+            [Bind("OrdersId, ProductId, UnitPrice, Quantity, Discount")] OrderDetailModel request)
         {
             if (ModelState.IsValid)
             {
-                _service.Add(new ProductEntity(request));
+                _service.Add(new OrderDetailsEntity(request));
                 return Redirect("Index");
             }
             return View("Add", request);
@@ -47,33 +47,33 @@ namespace POS.Web.Controllers
         [HttpGet]
         public IActionResult Details(int? id)
         {
-            var product = _service.View(id);
-            return View(product);
+            var orderDetail = _service.View(id);
+            return View(orderDetail);
         }
 
         [HttpGet]
         public IActionResult Edit(int? id)
         {
-            var product = _service.View(id);
-            return View(product);
+            var orderDetail = _service.View(id);
+            return View(orderDetail);
         }
 
         [HttpPost]
-        public IActionResult Update([Bind("Id, ProductName, SupplierId, CategoryId, QuantityPerUnit, UnitPrice, UnitInStock, UnitOnOrder, ReorderLevel, Discontinued")] ProductModel product)
+        public IActionResult Update([Bind("Id, OrdersId, ProductId, UnitPrice, Quantity, Discount")] OrderDetailModel orderDetail)
         {
             if (ModelState.IsValid)
             {
-                _service.Update(product);
+                _service.Update(orderDetail);
                 return Redirect("Index");
             }
-            return View("Edit", product);
+            return View("Edit", orderDetail);
         }
 
         [HttpGet]
         public IActionResult Delete(int? id)
         {
             _service.Delete(id);
-            return Redirect("/Product");
+            return Redirect("/OrderDetail");
         }
     }
 }

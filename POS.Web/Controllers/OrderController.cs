@@ -5,12 +5,12 @@ using POS.ViewModel;
 
 namespace POS.Web.Controllers
 {
-    public class ProductController : Controller
+    public class OrderController : Controller
     {
-        private readonly ProductService _service;
-        public ProductController(ApplicationDbContext context)
+        private readonly OrderService _service;
+        public OrderController(ApplicationDbContext context)
         {
-            _service = new ProductService(context);
+            _service = new OrderService(context);
         }
 
         [HttpGet]
@@ -34,11 +34,11 @@ namespace POS.Web.Controllers
 
         [HttpPost]
         public IActionResult Save(
-            [Bind("ProductName, SupplierId, CategoryId, QuantityPerUnit, UnitPrice, UnitInStock, UnitOnOrder, ReorderLevel, Discontinued")] ProductModel request)
+            [Bind("CustomersId, EmployeesId, OrderDate, RequiredDate, ShippedDate, ShipVia, Freight, ShipName, ShipAddress, ShipCity, ShipRegion, ShipPostalCode, ShipCountry")] OrderModel request)
         {
             if (ModelState.IsValid)
             {
-                _service.Add(new ProductEntity(request));
+                _service.Add(new OrdersEntity(request));
                 return Redirect("Index");
             }
             return View("Add", request);
@@ -47,33 +47,33 @@ namespace POS.Web.Controllers
         [HttpGet]
         public IActionResult Details(int? id)
         {
-            var product = _service.View(id);
-            return View(product);
+            var order = _service.View(id);
+            return View(order);
         }
 
         [HttpGet]
         public IActionResult Edit(int? id)
         {
-            var product = _service.View(id);
-            return View(product);
+            var order = _service.View(id);
+            return View(order);
         }
 
         [HttpPost]
-        public IActionResult Update([Bind("Id, ProductName, SupplierId, CategoryId, QuantityPerUnit, UnitPrice, UnitInStock, UnitOnOrder, ReorderLevel, Discontinued")] ProductModel product)
+        public IActionResult Update([Bind("Id, CustomersId, EmployeesId, OrderDate, RequiredDate, ShippedDate, ShipVia, Freight, ShipName, ShipAddress, ShipCity, ShipRegion, ShipPostalCode, ShipCountry")] OrderModel order)
         {
             if (ModelState.IsValid)
             {
-                _service.Update(product);
+                _service.Update(order);
                 return Redirect("Index");
             }
-            return View("Edit", product);
+            return View("Edit", order);
         }
 
         [HttpGet]
         public IActionResult Delete(int? id)
         {
             _service.Delete(id);
-            return Redirect("/Product");
+            return Redirect("/Order");
         }
     }
 }

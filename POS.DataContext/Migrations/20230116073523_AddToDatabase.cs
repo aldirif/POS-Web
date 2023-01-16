@@ -35,7 +35,7 @@ namespace POS.Repository.Migrations
                     address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     city = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     region = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    postal_code = table.Column<int>(type: "int", nullable: false),
+                    postal_code = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     country = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     fax = table.Column<string>(type: "nvarchar(max)", nullable: false)
@@ -60,7 +60,7 @@ namespace POS.Repository.Migrations
                     address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     city = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     region = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    postal_code = table.Column<int>(type: "int", nullable: false),
+                    postal_code = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     country = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     home_phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     extension = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -85,7 +85,7 @@ namespace POS.Repository.Migrations
                     address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     city = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     region = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    postal_code = table.Column<int>(type: "int", nullable: false),
+                    postal_code = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     country = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     fax = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -102,8 +102,8 @@ namespace POS.Repository.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CustomersId = table.Column<int>(type: "int", nullable: false),
-                    EmployeesId = table.Column<int>(type: "int", nullable: false),
+                    customer_id = table.Column<int>(type: "int", nullable: false),
+                    employee_id = table.Column<int>(type: "int", nullable: false),
                     order_date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     required_date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     shipped_date = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -120,14 +120,14 @@ namespace POS.Repository.Migrations
                 {
                     table.PrimaryKey("PK_tbl_order", x => x.id);
                     table.ForeignKey(
-                        name: "FK_tbl_order_tbl_customers_CustomersId",
-                        column: x => x.CustomersId,
+                        name: "FK_tbl_order_tbl_customers_customer_id",
+                        column: x => x.customer_id,
                         principalTable: "tbl_customers",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_tbl_order_tbl_employees_EmployeesId",
-                        column: x => x.EmployeesId,
+                        name: "FK_tbl_order_tbl_employees_employee_id",
+                        column: x => x.employee_id,
                         principalTable: "tbl_employees",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -142,24 +142,24 @@ namespace POS.Repository.Migrations
                     product_name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     supplier_id = table.Column<int>(type: "int", nullable: false),
                     category_id = table.Column<int>(type: "int", nullable: false),
-                    quantity_per_unit = table.Column<long>(type: "bigint", nullable: false),
+                    quantity_per_unit = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     unit_price = table.Column<double>(type: "float", nullable: false),
                     unit_in_stock = table.Column<long>(type: "bigint", nullable: false),
                     unit_on_order = table.Column<long>(type: "bigint", nullable: false),
                     reorder_level = table.Column<long>(type: "bigint", nullable: false),
-                    discontinued = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    discontinued = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_tbl_product", x => x.id);
                     table.ForeignKey(
-                        name: "FK_tbl_product_tbl_category_CategoryId",
+                        name: "FK_tbl_product_tbl_category_category_id",
                         column: x => x.category_id,
                         principalTable: "tbl_category",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_tbl_product_tbl_supplier_SupplierId",
+                        name: "FK_tbl_product_tbl_supplier_supplier_id",
                         column: x => x.supplier_id,
                         principalTable: "tbl_supplier",
                         principalColumn: "id",
@@ -172,9 +172,9 @@ namespace POS.Repository.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    OrdersId = table.Column<int>(type: "int", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
-                    unit_price = table.Column<int>(type: "int", nullable: false),
+                    order_id = table.Column<int>(type: "int", nullable: false),
+                    product_id = table.Column<int>(type: "int", nullable: false),
+                    unit_price = table.Column<double>(type: "float", nullable: false),
                     quantity = table.Column<long>(type: "bigint", nullable: false),
                     discount = table.Column<double>(type: "float", nullable: false)
                 },
@@ -182,48 +182,48 @@ namespace POS.Repository.Migrations
                 {
                     table.PrimaryKey("PK_tbl_order_details", x => x.id);
                     table.ForeignKey(
-                        name: "FK_tbl_order_details_tbl_order_OrdersId",
-                        column: x => x.OrdersId,
+                        name: "FK_tbl_order_details_tbl_order_order_id",
+                        column: x => x.order_id,
                         principalTable: "tbl_order",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_tbl_order_details_tbl_product_ProductId",
-                        column: x => x.ProductId,
+                        name: "FK_tbl_order_details_tbl_product_product_id",
+                        column: x => x.product_id,
                         principalTable: "tbl_product",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_tbl_order_CustomersId",
+                name: "IX_tbl_order_customer_id",
                 table: "tbl_order",
-                column: "CustomersId");
+                column: "customer_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_tbl_order_EmployeesId",
+                name: "IX_tbl_order_employee_id",
                 table: "tbl_order",
-                column: "EmployeesId");
+                column: "employee_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_tbl_order_details_OrdersId",
+                name: "IX_tbl_order_details_order_id",
                 table: "tbl_order_details",
-                column: "OrdersId");
+                column: "order_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_tbl_order_details_ProductId",
+                name: "IX_tbl_order_details_product_id",
                 table: "tbl_order_details",
-                column: "ProductId");
+                column: "product_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_tbl_product_CategoryId",
+                name: "IX_tbl_product_category_id",
                 table: "tbl_product",
-                column: "CategoryId");
+                column: "category_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_tbl_product_SupplierId",
+                name: "IX_tbl_product_supplier_id",
                 table: "tbl_product",
-                column: "SupplierId");
+                column: "supplier_id");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

@@ -27,7 +27,7 @@ namespace POS.Repository
         [Column("region")]
         public string Region { get; set; }
         [Column("postal_code")]
-        public int PostalCode { get; set; }
+        public string PostalCode { get; set; }
         [Column("country")]
         public string Country { get; set; }
         [Column("phone")]

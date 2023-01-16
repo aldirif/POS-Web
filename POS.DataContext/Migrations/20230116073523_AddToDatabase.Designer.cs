@@ -12,7 +12,7 @@ using POS.Repository;
 namespace POS.Repository.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230112061926_AddToDatabase")]
+    [Migration("20230116073523_AddToDatabase")]
     partial class AddToDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -97,8 +97,9 @@ namespace POS.Repository.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("phone");
 
-                    b.Property<int>("PostalCode")
-                        .HasColumnType("int")
+                    b.Property<string>("PostalCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("postal_code");
 
                     b.Property<string>("Region")
@@ -173,8 +174,9 @@ namespace POS.Repository.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("photo_path");
 
-                    b.Property<int>("PostalCode")
-                        .HasColumnType("int")
+                    b.Property<string>("PostalCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("postal_code");
 
                     b.Property<string>("Region")
@@ -215,17 +217,19 @@ namespace POS.Repository.Migrations
                         .HasColumnName("discount");
 
                     b.Property<int>("OrdersId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("order_id");
 
                     b.Property<int>("ProductId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("product_id");
 
                     b.Property<long>("Quantity")
                         .HasColumnType("bigint")
                         .HasColumnName("quantity");
 
-                    b.Property<int>("UnitPrice")
-                        .HasColumnType("int")
+                    b.Property<double>("UnitPrice")
+                        .HasColumnType("float")
                         .HasColumnName("unit_price");
 
                     b.HasKey("Id");
@@ -247,10 +251,12 @@ namespace POS.Repository.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int>("CustomersId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("customer_id");
 
                     b.Property<int>("EmployeesId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("employee_id");
 
                     b.Property<int>("Freight")
                         .HasColumnType("int")
@@ -321,11 +327,11 @@ namespace POS.Repository.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int>("CategoryId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("category_id");
 
-                    b.Property<string>("Discontinued")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                    b.Property<bool>("Discontinued")
+                        .HasColumnType("bit")
                         .HasColumnName("discontinued");
 
                     b.Property<string>("ProductName")
@@ -333,8 +339,9 @@ namespace POS.Repository.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("product_name");
 
-                    b.Property<long>("QuantityPerUnit")
-                        .HasColumnType("bigint")
+                    b.Property<string>("QuantityPerUnit")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("quantity_per_unit");
 
                     b.Property<long>("ReorderLevel")
@@ -342,7 +349,8 @@ namespace POS.Repository.Migrations
                         .HasColumnName("reorder_level");
 
                     b.Property<int>("SupplierId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("supplier_id");
 
                     b.Property<long>("UnitInStock")
                         .HasColumnType("bigint")
@@ -419,8 +427,9 @@ namespace POS.Repository.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("phone");
 
-                    b.Property<int>("PostalCode")
-                        .HasColumnType("int")
+                    b.Property<string>("PostalCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("postal_code");
 
                     b.Property<string>("Region")

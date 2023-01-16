@@ -1,28 +1,32 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
-@model IEnumerable<POS.Repository.ProductEntity>
+@model IEnumerable<POS.Repository.OrdersEntity>
 @{
-    ViewBag.Title = "Product";
+    ViewBag.Title = "Order";
     Layout = "_Layout";
 }
-<h2>Product</h2>
+<h2>Order</h2>
 <div class="pt-2 pb-2">
-    <a asp-action="Add" class="btn btn-primary" role="button" id="btn-add">Add Product</a>
+    <a asp-action="Add" class="btn btn-primary" role="button" id="btn-add">Add Order</a>
 </div>
 <table class="table table-responsive">
     <thead>
         <tr>
             <th>Id</th>
-            <th>Product Name</th>
-            <th>Supplier</th>
-            <th>Category</th>
-            <th>Quantity Per Unit</th>
-            <th>Unit Price</th>
-            <th>Unit In Stock</th>
-            <th>Unit On Order</th>
-            <th>Reorder Level</th>
-            <th>Discontinued</th>
+            <th>Customer</th>
+            <th>Employee</th>
+            <th>OrderDate</th>
+            <th>RequiredDate</th>
+            <th>ShippedDate</th>
+            <th>ShipVia</th>
+            <th>Freight Code</th>
+            <th>ShipName</th>
+            <th>ShipAddress</th>
+            <th>ShipCity</th>
+            <th>ShipRegion</th>
+            <th>ShipPostalCode</th>
+            <th>ShipCountry</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -31,15 +35,18 @@
         {
             <tr>
                 <td>@item.Id</td>
-                <td>@item.ProductName</td>
-                <td>@item.SupplierId</td>
-                <td>@item.CategoryId</td>
-                <td>@item.QuantityPerUnit</td>
-                <td>@item.UnitPrice</td>
-                <td>@item.UnitInStock</td>
-                <td>@item.UnitOnOrder</td>
-                <td>@item.ReorderLevel</td>
-                <td>@item.Discontinued</td>
+                <td>@item.CustomersId</td>
+                <td>@item.EmployeesId</td>
+                <td>@item.OrderDate</td>
+                <td>@item.RequiredDate</td>
+                <td>@item.ShippedDate</td>
+                <td>@item.ShipVia</td>
+                <td>@item.Freight</td>
+                <td>@item.ShipAddress</td>
+                <td>@item.ShipCity</td>
+                <td>@item.ShipRegion</td>
+                <td>@item.ShipPostalCode</td>
+                <td>@item.ShipCountry</td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Edit</a>
                     <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-success">View</a>
@@ -54,7 +61,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Add Product</h5>
+                <h5 class="modal-title">Add Order</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -72,7 +79,7 @@
             e.preventDefault();
             //alert("Ah ... kamu kok sentuh aku");
             $.ajax({
-                url: "/Product/AddModal",
+                url: "/Order/AddModal",
                 type: "GET",
                 dataType: "html",
                 success: function (data) {

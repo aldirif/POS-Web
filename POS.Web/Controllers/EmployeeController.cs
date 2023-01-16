@@ -5,19 +5,19 @@ using POS.ViewModel;
 
 namespace POS.Web.Controllers
 {
-    public class ProductController : Controller
+    public class EmployeeController : Controller
     {
-        private readonly ProductService _service;
-        public ProductController(ApplicationDbContext context)
+        private readonly EmployeeService _service;
+        public EmployeeController(ApplicationDbContext context)
         {
-            _service = new ProductService(context);
+            _service = new EmployeeService(context);
         }
 
         [HttpGet]
         public IActionResult Index()
         {
-            var product = _service.Get();
-            return View(product);
+            var Data = _service.Get();
+            return View(Data);
         }
 
         [HttpGet]
@@ -34,11 +34,11 @@ namespace POS.Web.Controllers
 
         [HttpPost]
         public IActionResult Save(
-            [Bind("ProductName, SupplierId, CategoryId, QuantityPerUnit, UnitPrice, UnitInStock, UnitOnOrder, ReorderLevel, Discontinued")] ProductModel request)
+            [Bind("LastName, FirstName, Title, TitleOfCourtesy, BirthDate, HireDate, Address, City, Region, PostalCode, Country, HomePhone, Extension, Notes, ReportsTo, PhotoPath")] EmployeeModel request)
         {
             if (ModelState.IsValid)
             {
-                _service.Add(new ProductEntity(request));
+                _service.Add(new EmployeesEntity(request));
                 return Redirect("Index");
             }
             return View("Add", request);
@@ -47,33 +47,33 @@ namespace POS.Web.Controllers
         [HttpGet]
         public IActionResult Details(int? id)
         {
-            var product = _service.View(id);
-            return View(product);
+            var customer = _service.View(id);
+            return View(customer);
         }
 
         [HttpGet]
         public IActionResult Edit(int? id)
         {
-            var product = _service.View(id);
-            return View(product);
+            var customer = _service.View(id);
+            return View(customer);
         }
 
         [HttpPost]
-        public IActionResult Update([Bind("Id, ProductName, SupplierId, CategoryId, QuantityPerUnit, UnitPrice, UnitInStock, UnitOnOrder, ReorderLevel, Discontinued")] ProductModel product)
+        public IActionResult Update([Bind("Id, LastName, FirstName, Title, TitleOfCourtesy, BirthDate, HireDate, Address, City, Region, PostalCode, Country, HomePhone, Extension, Notes, ReportsTo, PhotoPath")] EmployeeModel employee)
         {
             if (ModelState.IsValid)
             {
-                _service.Update(product);
+                _service.Update(employee);
                 return Redirect("Index");
             }
-            return View("Edit", product);
+            return View("Edit", employee);
         }
 
         [HttpGet]
         public IActionResult Delete(int? id)
         {
             _service.Delete(id);
-            return Redirect("/Product");
+            return Redirect("/Employee");
         }
     }
 }
