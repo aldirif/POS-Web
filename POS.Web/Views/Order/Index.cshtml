@@ -27,7 +27,7 @@
             <th>Ship Region</th>
             <th>Ship PostalCode</th>
             <th>Ship Country</th>
-            <th>Order Deatils</th>
+            <th>Order Details</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -52,9 +52,9 @@
                 <td>
                     @foreach (var data in item.orderDetailsEntities)
                     {
-                        <h6>@data.UnitPrice</h6>
-                        <h6>@data.Quantity</h6>
-                        <h6>@data.Discount</h6>
+                        <h6>Unit Price: @data.UnitPrice</h6>
+                        <h6>Quantity: @data.Quantity</h6>
+                        <h6>Discount: @data.Discount</h6>
                     }
                 </td>
                 <td>

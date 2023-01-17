@@ -67,11 +67,13 @@
             <th>Ship Country</th>
             <td>@Model.ShipCountry</td>
         </tr>
-        <th>Order Deatils</th>
+        <th>Order Details</th>
         <td>
                 @foreach (var data in Model.orderDetailsEntities)
                 {
-                    <h6>@data.Discount</h6>
+                    <h6>Unit Price: @data.UnitPrice</h6>
+                    <h6>Quantity: @data.Quantity</h6>
+                    <h6>Discount: @data.Discount</h6>
                 }
         </td>
     </tr>
