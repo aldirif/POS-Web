@@ -12,7 +12,7 @@ using POS.Repository;
 namespace POS.Repository.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230116073523_AddToDatabase")]
+    [Migration("20230117053559_AddToDatabase")]
     partial class AddToDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

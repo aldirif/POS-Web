@@ -27,6 +27,7 @@
             <th>Ship Region</th>
             <th>Ship PostalCode</th>
             <th>Ship Country</th>
+            <th>Order Deatils</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -48,6 +49,14 @@
                 <td>@item.ShipRegion</td>
                 <td>@item.ShipPostalCode</td>
                 <td>@item.ShipCountry</td>
+                <td>
+                    @foreach (var data in item.orderDetailsEntities)
+                    {
+                        <h6>@data.UnitPrice</h6>
+                        <h6>@data.Quantity</h6>
+                        <h6>@data.Discount</h6>
+                    }
+                </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Edit</a>
                     <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-success">View</a>

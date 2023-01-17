@@ -1,4 +1,5 @@
-﻿using POS.Repository;
+﻿using Microsoft.EntityFrameworkCore;
+using POS.Repository;
 using POS.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -58,6 +59,15 @@ namespace POS.Service
         public List<OrdersEntity> Get()
         {
             return _context.ordersEntities.ToList();
+        }
+
+        public List<OrdersEntity> GetWithOrderDetails()
+        {
+            return _context.ordersEntities.Include(s => s.orderDetailsEntities).ToList();
+        }
+        public OrdersEntity ViewWithOrderDetails(int? id)
+        {
+            return _context.ordersEntities.Include(s => s.orderDetailsEntities).FirstOrDefault(s => s.Id == id);
         }
 
         public void Add(OrdersEntity orders)
