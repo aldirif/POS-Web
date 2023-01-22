@@ -35,7 +35,7 @@ namespace POS.Repository.Migrations
                     address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     city = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     region = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    postal_code = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    postal_code = table.Column<int>(type: "int", nullable: false),
                     country = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     fax = table.Column<string>(type: "nvarchar(max)", nullable: false)
@@ -74,6 +74,20 @@ namespace POS.Repository.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "tbl_shipper",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    company_name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    phone = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tbl_shipper", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "tbl_supplier",
                 columns: table => new
                 {
@@ -85,7 +99,7 @@ namespace POS.Repository.Migrations
                     address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     city = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     region = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    postal_code = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    postal_code = table.Column<int>(type: "int", nullable: false),
                     country = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     fax = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -107,6 +121,7 @@ namespace POS.Repository.Migrations
                     order_date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     required_date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     shipped_date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    shipper_id = table.Column<int>(type: "int", nullable: false),
                     ship_via = table.Column<int>(type: "int", nullable: false),
                     freight = table.Column<int>(type: "int", nullable: false),
                     ship_name = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -131,6 +146,12 @@ namespace POS.Repository.Migrations
                         principalTable: "tbl_employees",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_tbl_order_tbl_shipper_shipper_id",
+                        column: x => x.shipper_id,
+                        principalTable: "tbl_shipper",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -142,7 +163,7 @@ namespace POS.Repository.Migrations
                     product_name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     supplier_id = table.Column<int>(type: "int", nullable: false),
                     category_id = table.Column<int>(type: "int", nullable: false),
-                    quantity_per_unit = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    quantity_per_unit = table.Column<int>(type: "int", nullable: false),
                     unit_price = table.Column<double>(type: "float", nullable: false),
                     unit_in_stock = table.Column<long>(type: "bigint", nullable: false),
                     unit_on_order = table.Column<long>(type: "bigint", nullable: false),
@@ -175,7 +196,7 @@ namespace POS.Repository.Migrations
                     order_id = table.Column<int>(type: "int", nullable: false),
                     product_id = table.Column<int>(type: "int", nullable: false),
                     unit_price = table.Column<double>(type: "float", nullable: false),
-                    quantity = table.Column<long>(type: "bigint", nullable: false),
+                    quantity = table.Column<int>(type: "int", nullable: false),
                     discount = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
@@ -204,6 +225,11 @@ namespace POS.Repository.Migrations
                 name: "IX_tbl_order_employee_id",
                 table: "tbl_order",
                 column: "employee_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_tbl_order_shipper_id",
+                table: "tbl_order",
+                column: "shipper_id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_tbl_order_details_order_id",
@@ -242,6 +268,9 @@ namespace POS.Repository.Migrations
 
             migrationBuilder.DropTable(
                 name: "tbl_employees");
+
+            migrationBuilder.DropTable(
+                name: "tbl_shipper");
 
             migrationBuilder.DropTable(
                 name: "tbl_category");

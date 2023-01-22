@@ -1,8 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-
-@model POS.ViewModel.ProductModel
+﻿@model POS.ViewModel.ProductModel
 
 @{
     ViewData["Title"] = "Product Edit";
@@ -14,51 +10,40 @@
     <div class="form-group">
         <label asp-for="ProductName">Product Name</label>
         <input asp-for="ProductName" class="form-control" />
-        <span asp-validation-for="ProductName" class="text-danger" />
     </div>
     <div class="form-group">
-        <label asp-for="SupplierId">Supplier</label>
-        <select asp-for="SupplierId" class="form-control">
-            <option>Pilih Supplier</option>
-            <option value="1">Supplier 1</option>
-            <option value="2">Supplier 2</option>
+        <label asp-for="SupplierId">SupplierId</label>
+        <select type="text" asp-for="SupplierId" class="form-control" asp-items="@ViewBag.Supplier">
+            <option selected>Select Supplier</option>
         </select>
         <span asp-validation-for="SupplierId" class="text-danger" />
     </div>
     <div class="form-group">
-        <label asp-for="CategoryId">Category</label>
-        <select asp-for="CategoryId" class="form-control">
-            <option>Pilih Category</option>
-            <option value="1">Category 1</option>
-            <option value="2">Category 2</option>
-            <option value="3">Category 3</option>
+        <label asp-for="CategoryId">CategoryId</label>
+        <select type="text" asp-for="CategoryId" class="form-control" asp-items="@ViewBag.Category">
+            <option selected>Select Category</option>
         </select>
         <span asp-validation-for="CategoryId" class="text-danger" />
     </div>
     <div class="form-group">
-        <label asp-for="QuantityPerUnit">Quantity Per Unit</label>
-        <input asp-for="QuantityPerUnit" class="form-control" />
-        <span asp-validation-for="QuantityPerUnit" class="text-danger" />
+        <label asp-for="Quantity">Quantity Per Unit</label>
+        <input asp-for="Quantity" class="form-control" />
     </div>
     <div class="form-group">
         <label asp-for="UnitPrice">Unit Price</label>
         <input asp-for="UnitPrice" class="form-control" />
-        <span asp-validation-for="UnitPrice" class="text-danger" />
     </div>
     <div class="form-group">
         <label asp-for="UnitInStock">Unit In Stock</label>
         <input asp-for="UnitInStock" class="form-control" />
-        <span asp-validation-for="UnitInStock" class="text-danger" />
     </div>
     <div class="form-group">
         <label asp-for="UnitOnOrder">Unit On Order</label>
         <input asp-for="UnitOnOrder" class="form-control" />
-        <span asp-validation-for="UnitOnOrder" class="text-danger" />
     </div>
     <div class="form-group">
         <label asp-for="ReorderLevel">Reorder Level</label>
         <input asp-for="ReorderLevel" class="form-control" />
-        <span asp-validation-for="ReorderLevel" class="text-danger" />
     </div>
     <div class="form-group">
         <input asp-for="Discontinued" type="checkbox">
@@ -66,6 +51,7 @@
     </div>
     <div class="pt-2 pb-2">
         <button type="submit" class="btn btn-sm btn-primary">Update</button>
+        <a asp-action="Index" class="btn btn-sm btn-success">Back</a>
     </div>
     
 </form>

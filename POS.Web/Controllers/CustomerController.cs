@@ -16,8 +16,8 @@ namespace POS.Web.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var Data = _service.Get();
-            return View(Data);
+            var customers = _service.Get();
+            return View(customers);
         }
 
         [HttpGet]
@@ -25,7 +25,6 @@ namespace POS.Web.Controllers
         {
             return View();
         }
-
         [HttpGet]
         public IActionResult AddModal()
         {
@@ -59,8 +58,16 @@ namespace POS.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Update([Bind("Id, CompanyName, ContactName, ContactTitle, Address, City, Region, PostalCode, Country, Phone, Fax")] CustomerModel customer)
+        public IActionResult Update([Bind("Id, CompanyName, CustomerName, ContactName, ContactTitle, Address, City, Region, PostalCode, Country, Phone, Fax")] CustomerModel customer)
         {
+            /*if (ModelState.IsValid)
+            {
+                CustomersEntity entity = new CustomersEntity(customer);
+                entity.Id = customer.Id;
+                _service.Update(entity);
+                return Redirect("Index");
+            }
+            return View("Edit", customer);*/
             if (ModelState.IsValid)
             {
                 _service.Update(customer);

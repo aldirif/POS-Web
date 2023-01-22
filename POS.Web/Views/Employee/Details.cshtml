@@ -1,8 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-
-@model POS.ViewModel.EmployeeModel
+﻿@model POS.ViewModel.EmployeeModel
 
 @{
     ViewData["Title"] = "Employee Detail";
@@ -27,15 +23,15 @@
             <th>Title</th>
             <td>@Model.Title</td>
         </tr>
-         <tr>
+        <tr>
             <th>Title Of Courtesy</th>
             <td>@Model.TitleOfCourtesy</td>
         </tr>
-         <tr>
+        <tr>
             <th>Birth Date</th>
             <td>@Model.BirthDate</td>
         </tr>
-         <tr>
+        <tr>
             <th>Hire Date</th>
             <td>@Model.HireDate</td>
         </tr>
@@ -71,7 +67,7 @@
             <th>Notes</th>
             <td>@Model.Notes</td>
         </tr>
-         <tr>
+        <tr>
             <th>Reports To</th>
             <td>@Model.ReportsTo</td>
         </tr>
@@ -81,3 +77,4 @@
         </tr>
     </tbody>
 </table>
+<a asp-action="Index" class="btn btn-sm btn-success">Back</a>

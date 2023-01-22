@@ -11,36 +11,36 @@ namespace POS.Service
     public class CustomerService
     {
         private readonly ApplicationDbContext _context;
-        private CustomerModel EntityToModel(CustomersEntity entity)
+
+        public CustomerModel EntityToModel(CustomersEntity customersEntity)
         {
             CustomerModel result = new CustomerModel();
-            result.Id = entity.Id;
-            result.CompanyName = entity.CompanyName;
-            result.ContactName = entity.ContactName;
-            result.ContactTitle= entity.ContactTitle;
-            result.Address = entity.Address;
-            result.City = entity.City;
-            result.Region = entity.Region;
-            result.PostalCode = entity.PostalCode;
-            result.Country = entity.Country;
-            result.Phone = entity.Phone;
-            result.Fax = entity.Fax;
-
+            result.Id = customersEntity.Id;
+            result.CompanyName = customersEntity.CompanyName;
+            result.ContactName = customersEntity.ContactName;
+            result.ContactTitle = customersEntity.ContactTitle;
+            result.Address = customersEntity.Address;
+            result.City = customersEntity.City;
+            result.Region = customersEntity.Region;
+            result.PostalCode = customersEntity.PostalCode;
+            result.Country = customersEntity.Country;
+            result.Phone = customersEntity.Phone;
+            result.Fax = customersEntity.Fax;
             return result;
         }
 
-        private void ModelToEntity(CustomerModel model, CustomersEntity entity)
+        public void ModelToEntity(CustomerModel model, CustomersEntity entity)
         {
-            entity.CompanyName= model.CompanyName;
-            entity.ContactName= model.ContactName;
-            entity.ContactTitle= model.ContactTitle;
-            entity.Address= model.Address;
-            entity.City= model.City;
-            entity.Region= model.Region;
-            entity.PostalCode= model.PostalCode;
-            entity.Country= model.Country;
-            entity.Phone= model.Phone;
-            entity.Fax= model.Fax;
+            entity.CompanyName = model.CompanyName;
+            entity.ContactName = model.ContactName;
+            entity.ContactTitle = model.ContactTitle;
+            entity.Address = model.Address;
+            entity.City = model.City;
+            entity.Region = model.Region;
+            entity.PostalCode = model.PostalCode;
+            entity.Country = model.Country;
+            entity.Phone = model.Phone;
+            entity.Fax = model.Fax;
         }
 
         public CustomerService(ApplicationDbContext context)
@@ -61,8 +61,8 @@ namespace POS.Service
 
         public CustomerModel View(int? id)
         {
-            var customer = _context.customersEntities.Find(id);
-            return EntityToModel(customer);
+            var customers = _context.customersEntities.Find(id);
+            return EntityToModel(customers);
         }
 
         public void Update(CustomerModel customers)
@@ -75,8 +75,8 @@ namespace POS.Service
 
         public void Delete(int? id)
         {
-            var entity = _context.customersEntities.Find(id);
-            _context.customersEntities.Remove(entity); 
+            var customers = _context.customersEntities.Find(id);
+            _context.customersEntities.Remove(customers); 
             _context.SaveChanges();
         }
 

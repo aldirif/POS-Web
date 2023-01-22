@@ -29,7 +29,6 @@ namespace POS.Service
             entity.CategoryName = model.CategoryName;
             entity.Description = model.Description;
         }
-
         public CategoryService(ApplicationDbContext context)
         {
             _context = context;
@@ -40,9 +39,9 @@ namespace POS.Service
             return _context.categoryEntities.ToList();
         }
 
-        public void Add(CategoryEntity category)
+        public void Add(CategoryEntity categoryEntity)
         {
-            _context.categoryEntities.Add(category);
+            _context.categoryEntities.Add(categoryEntity);
             _context.SaveChanges();
         }
 
@@ -58,17 +57,17 @@ namespace POS.Service
             ModelToEntity(category, entity);
             _context.categoryEntities.Update(entity);
             _context.SaveChanges();
-
         }
 
         public void Delete(int? id)
         {
+            var supplier = _context.categoryEntities.Find(id);
 
-            var entity = _context.categoryEntities.Find(id);
-            _context.categoryEntities.Remove(entity);
+            _context.categoryEntities.Remove(supplier);
             _context.SaveChanges();
         }
 
     }
+
 }
 

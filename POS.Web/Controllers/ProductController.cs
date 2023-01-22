@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using POS.Repository;
 using POS.Service;
 using POS.ViewModel;
@@ -8,9 +9,14 @@ namespace POS.Web.Controllers
     public class ProductController : Controller
     {
         private readonly ProductService _service;
+
+        private readonly CategoryService _categoryService;
+        private readonly SupplierService _supplierService;
         public ProductController(ApplicationDbContext context)
         {
             _service = new ProductService(context);
+            _categoryService = new CategoryService(context);
+            _supplierService = new SupplierService(context);
         }
 
         [HttpGet]
@@ -23,18 +29,22 @@ namespace POS.Web.Controllers
         [HttpGet]
         public IActionResult Add()
         {
+            ViewBag.Category = new SelectList(_categoryService.Get(), "Id", "CategoryName");
+            ViewBag.Supplier = new SelectList(_supplierService.Get(), "Id", "CompanyName");
             return View();
         }
 
         [HttpGet]
         public IActionResult AddModal()
         {
+            ViewBag.Category = new SelectList(_categoryService.Get(), "Id", "CategoryName");
+            ViewBag.Supplier = new SelectList(_supplierService.Get(), "Id", "CompanyName");
             return PartialView("_Add");
         }
 
         [HttpPost]
         public IActionResult Save(
-            [Bind("ProductName, SupplierId, CategoryId, QuantityPerUnit, UnitPrice, UnitInStock, UnitOnOrder, ReorderLevel, Discontinued")] ProductModel request)
+            [Bind("ProductName, SupplierId, CategoryId, Quantity, UnitPrice, UnitInStock, UnitOnOrder, ReorderLevel, Discontinued")] ProductModel request)
         {
             if (ModelState.IsValid)
             {
@@ -54,12 +64,14 @@ namespace POS.Web.Controllers
         [HttpGet]
         public IActionResult Edit(int? id)
         {
+            ViewBag.Category = new SelectList(_categoryService.Get(), "Id", "CategoryName");
+            ViewBag.Supplier = new SelectList(_supplierService.Get(), "Id", "CompanyName");
             var product = _service.View(id);
             return View(product);
         }
 
         [HttpPost]
-        public IActionResult Update([Bind("Id, ProductName, SupplierId, CategoryId, QuantityPerUnit, UnitPrice, UnitInStock, UnitOnOrder, ReorderLevel, Discontinued")] ProductModel product)
+        public IActionResult Update([Bind("Id, ProductName, SupplierId, CategoryId, Quantity, UnitPrice, UnitInStock, UnitOnOrder, ReorderLevel, Discontinued")] ProductModel product)
         {
             if (ModelState.IsValid)
             {

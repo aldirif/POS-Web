@@ -1,10 +1,10 @@
-﻿@model POS.ViewModel.CategoryModel
+﻿@model POS.ViewModel.ShipperModel
 
 @{
-    ViewData["Title"] = "Category Detail";
+    ViewData["Title"] = "Shipper Detail";
 }
 
-<h2>Category Detail</h2>
+<h2>Shipper Detail</h2>
 <table class="table tab-content">
     <tbody>
         <tr>
@@ -12,12 +12,12 @@
             <td>@Model.Id</td>
         </tr>
         <tr>
-            <th>Category Name</th>
-            <td>@Model.CategoryName</td>
+            <th>Company Name</th>
+            <td>@Model.CompanyName</td>
         </tr>
         <tr>
-            <th>Description</th>
-            <td>@Model.Description</td>
+            <th>Phone</th>
+            <td>@Model.Phone</td>
         </tr>
     </tbody>
 </table>

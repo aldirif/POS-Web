@@ -15,22 +15,22 @@ namespace POS.Service
         {
             EmployeeModel result = new EmployeeModel();
             result.Id = entity.Id;
-            result.LastName= entity.LastName;
-            result.FirstName= entity.FirstName;
-            result.Title= entity.Title;
-            result.TitleOfCourtesy= entity.TitleOfCourtesy;
-            result.BirthDate= entity.BirthDate;
-            result.HireDate= entity.HireDate;
-            result.Address= entity.Address;
-            result.City= entity.City;
-            result.Region= entity.Region;
-            result.PostalCode= entity.PostalCode;
-            result.Country= entity.Country;
-            result.HomePhone= entity.HomePhone;
-            result.Extension= entity.Extension;
-            result.Notes= entity.Notes;
-            result.ReportsTo= entity.ReportsTo;
-            result.PhotoPath= entity.PhotoPath;
+            result.LastName = entity.LastName;
+            result.FirstName = entity.FirstName;
+            result.Title = entity.Title;
+            result.TitleOfCourtesy = entity.TitleOfCourtesy;
+            result.BirthDate = entity.BirthDate;
+            result.HireDate = entity.HireDate;
+            result.Address = entity.Address;
+            result.City = entity.City;
+            result.Region = entity.Region;
+            result.PostalCode = entity.PostalCode;
+            result.Country = entity.Country;
+            result.HomePhone = entity.HomePhone;
+            result.Extension = entity.Extension;
+            result.Notes = entity.Notes;
+            result.ReportsTo = entity.ReportsTo;
+            result.PhotoPath = entity.PhotoPath;
 
 
             return result;
@@ -38,22 +38,22 @@ namespace POS.Service
 
         private void ModelToEntity(EmployeeModel model, EmployeesEntity entity)
         {
-            entity.LastName= model.LastName;
-            entity.FirstName= model.FirstName;
-            entity.Title= model.Title;
-            entity.TitleOfCourtesy= model.TitleOfCourtesy;
-            entity.BirthDate= model.BirthDate;
-            entity.HireDate= model.HireDate;
-            entity.Address= model.Address;
-            entity.City= model.City;
-            entity.Region= model.Region;
-            entity.PostalCode= model.PostalCode;
-            entity.Country= model.Country;
-            entity.HomePhone= model.HomePhone;
-            entity.Extension= model.Extension;
-            entity.Notes= model.Notes;
-            entity.ReportsTo= model.ReportsTo;
-            entity.PhotoPath= model.PhotoPath;
+            entity.LastName = model.LastName;
+            entity.FirstName = model.FirstName;
+            entity.Title = model.Title;
+            entity.TitleOfCourtesy = model.TitleOfCourtesy;
+            entity.BirthDate = model.BirthDate;
+            entity.HireDate = model.HireDate;
+            entity.Address = model.Address;
+            entity.City = model.City;
+            entity.Region = model.Region;
+            entity.PostalCode = model.PostalCode;
+            entity.Country = model.Country;
+            entity.HomePhone = model.HomePhone;
+            entity.Extension = model.Extension;
+            entity.Notes = model.Notes;
+            entity.ReportsTo = model.ReportsTo;
+            entity.PhotoPath = model.PhotoPath;
         }
 
         public EmployeeService(ApplicationDbContext context)

@@ -1,7 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@model IEnumerable<POS.Repository.ProductEntity>
+﻿@model IEnumerable<POS.Repository.ProductEntity>
 @{
     ViewBag.Title = "Product";
     Layout = "_Layout";
@@ -34,7 +31,7 @@
                 <td>@item.ProductName</td>
                 <td>@item.SupplierId</td>
                 <td>@item.CategoryId</td>
-                <td>@item.QuantityPerUnit</td>
+                <td>@item.Quantity</td>
                 <td>@item.UnitPrice</td>
                 <td>@item.UnitInStock</td>
                 <td>@item.UnitOnOrder</td>
@@ -54,13 +51,12 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Add Product</h5>
+                <h5 class="modal-title">Modal title</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <p>Modal body text goes here.</p>
             </div>
-
         </div>
     </div>
 </div>
@@ -70,7 +66,6 @@
     <script type="text/javascript">
         $("#btn-add").on("click", function (e) {
             e.preventDefault();
-            //alert("Ah ... kamu kok sentuh aku");
             $.ajax({
                 url: "/Product/AddModal",
                 type: "GET",
@@ -84,5 +79,3 @@
         });
     </script>
 }
-
-

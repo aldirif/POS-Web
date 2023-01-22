@@ -19,12 +19,12 @@ namespace POS.Service
             product.ProductName = productEntity.ProductName;
             product.SupplierId = productEntity.SupplierId;
             product.CategoryId = productEntity.CategoryId;
-            product.QuantityPerUnit = productEntity.QuantityPerUnit;
+            product.Quantity = productEntity.Quantity;
             product.UnitPrice = productEntity.UnitPrice;
             product.UnitInStock = productEntity.UnitInStock;
             product.UnitOnOrder = productEntity.UnitOnOrder;
             product.ReorderLevel = productEntity.ReorderLevel;
-            product.Discontinued = productEntity.Discontinued;
+            product.Discontinued= productEntity.Discontinued;
             return product;
         }
 
@@ -33,12 +33,12 @@ namespace POS.Service
             entity.ProductName = model.ProductName;
             entity.SupplierId = model.SupplierId;
             entity.CategoryId = model.CategoryId;
-            entity.QuantityPerUnit = model.QuantityPerUnit;
+            entity.Quantity = model.Quantity;
             entity.UnitPrice = model.UnitPrice;
             entity.UnitInStock = model.UnitInStock;
             entity.UnitOnOrder = model.UnitOnOrder;
             entity.ReorderLevel = model.ReorderLevel;
-            entity.Discontinued = model.Discontinued;
+            entity.Discontinued= model.Discontinued;
         }
 
         public ProductService(ApplicationDbContext context)
@@ -74,7 +74,7 @@ namespace POS.Service
         public void Delete(int? id)
         {
             var product = _context.productEntities.Find(id);
-            _context.productEntities.Remove(product);
+            _context.productEntities.Remove(product); 
             _context.SaveChanges();
         }
 

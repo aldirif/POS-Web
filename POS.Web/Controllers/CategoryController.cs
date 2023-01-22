@@ -13,11 +13,11 @@ namespace POS.Web.Controllers
             _service = new CategoryService(context);
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             var Data = _service.Get();
             return View(Data);
-
         }
 
         [HttpGet]
@@ -32,18 +32,16 @@ namespace POS.Web.Controllers
             return PartialView("_Add");
         }
 
-
         [HttpPost]
         public IActionResult Save([Bind("CategoryName, Description")] CategoryModel request)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 _service.Add(new CategoryEntity(request));
                 return Redirect("Index");
             }
             return View("Add", request);
         }
-
         [HttpGet]
         public IActionResult Details(int? id)
         {
@@ -59,6 +57,7 @@ namespace POS.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Update([Bind("Id, CategoryName, Description")] CategoryModel category)
         {
             if (ModelState.IsValid)
@@ -67,7 +66,6 @@ namespace POS.Web.Controllers
                 return Redirect("Index");
             }
             return View("Edit", category);
-
         }
 
         [HttpGet]

@@ -1,8 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-
-@model POS.ViewModel.ProductModel
+﻿@model POS.ViewModel.ProductModel
 
 @{
     ViewData["Title"] = "Product Detail";
@@ -29,7 +25,7 @@
         </tr>
         <tr>
             <th>Quantity Per Unit</th>
-            <td>@Model.QuantityPerUnit</td>
+            <td>@Model.Quantity</td>
         </tr>
         <tr>
             <th>Unit Price</th>
@@ -53,3 +49,4 @@
         </tr>
     </tbody>
 </table>
+<a asp-action="Index" class="btn btn-sm btn-success">Back</a>

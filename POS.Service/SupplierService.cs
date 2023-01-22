@@ -11,38 +11,38 @@ namespace POS.Service
     public class SupplierService
     {
         private readonly ApplicationDbContext _context;
-        private SupplierModel EntityToModel(SupplierEntity entity)
+
+        public SupplierModel EntityToModel(SupplierEntity supplierEntity)
         {
             SupplierModel result = new SupplierModel();
-            result.Id = entity.Id;
-            result.CompanyName = entity.CompanyName;
-            result.ContactName = entity.ContactName;
-            result.ContactTitle= entity.ContactTitle;
-            result.Address = entity.Address;
-            result.City = entity.City;
-            result.Region = entity.Region;
-            result.PostalCode = entity.PostalCode;
-            result.Country = entity.Country;
-            result.Phone = entity.Phone;
-            result.Fax = entity.Fax;
-            result.HomePage= entity.HomePage;
-
+            result.Id = supplierEntity.Id;
+            result.CompanyName = supplierEntity.CompanyName;
+            result.ContactName = supplierEntity.ContactName;
+            result.ContactTitle = supplierEntity.ContactTitle;
+            result.Address = supplierEntity.Address;
+            result.City = supplierEntity.City;
+            result.Region = supplierEntity.Region;
+            result.PostalCode = supplierEntity.PostalCode;
+            result.Country = supplierEntity.Country;
+            result.Phone = supplierEntity.Phone;
+            result.Fax = supplierEntity.Fax;
+            result.HomePage = supplierEntity.HomePage;
             return result;
         }
 
-        private void ModelToEntity(SupplierModel model, SupplierEntity entity)
+        public void ModelToEntity(SupplierModel model, SupplierEntity entity)
         {
-            entity.CompanyName= model.CompanyName;
-            entity.ContactName= model.ContactName;
-            entity.ContactTitle= model.ContactTitle;
-            entity.Address= model.Address;
-            entity.City= model.City;
-            entity.Region= model.Region;
-            entity.PostalCode= model.PostalCode;
-            entity.Country= model.Country;
-            entity.Phone= model.Phone;
-            entity.Fax= model.Fax;
-            entity.HomePage= model.HomePage;
+            entity.CompanyName = model.CompanyName;
+            entity.ContactName = model.ContactName;
+            entity.ContactTitle = model.ContactTitle;
+            entity.Address = model.Address;
+            entity.City = model.City;
+            entity.Region = model.Region;
+            entity.PostalCode = model.PostalCode;
+            entity.Country = model.Country;
+            entity.Phone = model.Phone;
+            entity.Fax = model.Fax;
+            entity.HomePage = model.HomePage;
         }
 
         public SupplierService(ApplicationDbContext context)
@@ -77,8 +77,8 @@ namespace POS.Service
 
         public void Delete(int? id)
         {
-            var entity = _context.supplierEntities.Find(id);
-            _context.supplierEntities.Remove(entity);
+            var supplier = _context.supplierEntities.Find(id);
+            _context.supplierEntities.Remove(supplier);
             _context.SaveChanges();
         }
     }
