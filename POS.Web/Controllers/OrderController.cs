@@ -41,12 +41,7 @@ namespace POS.Web.Controllers
             return View();
         }
 
-        /*[HttpGet]
-        public IActionResult AddModal()
-        {
-            //ViewBag.Customer = new SelectList(_customerService.Get(), "Id", "CompanyName");
-            return PartialView("_Add");
-        }*/
+      
 
         [HttpPost]
         public IActionResult Save(

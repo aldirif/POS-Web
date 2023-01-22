@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace POS.ViewModel
 {
-    public class OrderWithDetailDTO
+    public class OrderWithDetailRes
     {
         public int Id { get; set; }
         public int CustomersId { get; set; }
@@ -27,7 +27,7 @@ namespace POS.ViewModel
         public string ShipPostalCode { get; set; }
         public string ShipCountry { get; set; }
 
-        public List<OrderDetailDTO> orderDetails { get; set; }
+        public List<OrderDetailRes> orderDetails { get; set; }
 
         public double Subtotal { get; set; }
         public double Tax { get; set; }

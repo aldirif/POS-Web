@@ -96,12 +96,12 @@ namespace POS.Service
             _context = context;
         }
 
-        private OrderWithDetailDTO GetOrderWithDetailDTO(OrdersEntity entity)
+        private OrderWithDetailRes GetOrderWithDetailDTO(OrdersEntity entity)
         {
             var customer = _context.customersEntities.Find(entity.CustomersId);
             var shipper = _context.shipperEntities.Find(entity.ShipperId);
 
-            OrderWithDetailDTO orderWithDetail = new OrderWithDetailDTO();
+            OrderWithDetailRes orderWithDetail = new OrderWithDetailRes();
             orderWithDetail.Id = entity.Id;
             orderWithDetail.CustomersId = customer.Id;
             orderWithDetail.CompanyName = customer.CompanyName;
@@ -118,7 +118,7 @@ namespace POS.Service
             orderWithDetail.ShipRegion = entity.ShipRegion;
             orderWithDetail.ShipPostalCode = entity.ShipPostalCode;
             orderWithDetail.ShipCountry = entity.ShipCountry;
-            orderWithDetail.orderDetails = new List<OrderDetailDTO>();
+            orderWithDetail.orderDetails = new List<OrderDetailRes>();
 
             foreach (var item in entity.orderDetailsEntities)
             {
@@ -138,9 +138,9 @@ namespace POS.Service
             return orderWithDetail;
         }
 
-        private OrderDetailDTO GetOrderDetailDTO(OrderDetailsEntity entity)
+        private OrderDetailRes GetOrderDetailDTO(OrderDetailsEntity entity)
         {
-            var model = new OrderDetailDTO();
+            var model = new OrderDetailRes();
             var product = _context.productEntities.Find(entity.ProductId);
 
             model.Id = entity.Id;
@@ -157,12 +157,6 @@ namespace POS.Service
         {
             return _context.ordersEntities.ToList();
         }
-
-        /*public void Add(OrdersEntity orders)
-        {
-            _context.ordersEntities.Add(orders);
-            _context.SaveChanges();
-        }*/
 
         public void Add(OrderModel newOrder)
         {
@@ -186,7 +180,7 @@ namespace POS.Service
 
         }
 
-        public OrderWithDetailDTO ViewDetail(int? id)
+        public OrderWithDetailRes ViewDetail(int? id)
         {
             var orderEntity = _context.ordersEntities.Find(id);
             var detailEntity = _context.orderDetailsEntities.Where(x => x.OrdersId == id).ToList();
